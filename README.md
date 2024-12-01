@@ -6,6 +6,8 @@ and prompt themes.
 
 ## Installation
 
+### Manual
+
 Prezto will work with any recent release of Zsh, but the minimum required
 version is **4.3.11**.
 
@@ -35,11 +37,11 @@ version is **4.3.11**.
         git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}/.zprezto"
         ```
 
-      - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`${$HOME}/.zshenv`_:
+      - Configure `$XDG_CONFIG_HOME` and `$ZDOTDIR` in _`$HOME/.zshenv`_:
 
         ```sh
         export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:=$HOME/.config}"
-        export ZDOTDIR="${ZDOTDIR:=$XDG_CONFIG_HOME/zsh}"
+        [[ -d $XDG_CONFIG_HOME/zsh ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
         source "$ZDOTDIR/.zshenv"
         ```
 

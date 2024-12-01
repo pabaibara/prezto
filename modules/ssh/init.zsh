@@ -16,8 +16,8 @@ _ssh_dir="$HOME/.ssh"
 # Set the path to the environment file if not set by another module.
 _ssh_agent_env="${_ssh_agent_env:-${XDG_CACHE_HOME:-$HOME/.cache}/prezto/ssh-agent.env}"
 
-# Set the path to the persistent authentication socket.
-_ssh_agent_sock="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/ssh-agent.sock"
+# Set the path to the persistent authentication socket if not set by another module.
+_ssh_agent_sock="${_ssh_agent_sock:-${XDG_CACHE_HOME:-$HOME/.cache}/prezto/ssh-agent.sock}"
 
 # Start ssh-agent if not started.
 if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
@@ -52,9 +52,9 @@ if ssh-add -l 2>&1 | grep -q 'The agent has no identities'; then
   # program specified by SSH_ASKPASS and open an X11 window to read the
   # passphrase.
   if [[ -n "$DISPLAY" && -x "$SSH_ASKPASS" ]]; then
-    ssh-add ${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}} < /dev/null 2> /dev/null
+    ssh-add ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} < /dev/null 2> /dev/null
   else
-    ssh-add ${_ssh_identities:+$_ssh_dir/${^_ssh_identities[@]}} 2> /dev/null
+    ssh-add ${_ssh_identities:+$_ssh_dir/${^~_ssh_identities[@]}} 2> /dev/null
   fi
 fi
 
